@@ -1,0 +1,34 @@
+body {
+	font-family: Ubuntu;
+	color: white;
+}
+
+#time {
+	font-weight: 100;
+	font-size: 100px;
+	position: fixed;
+	top: 80%;
+	left: 50%;
+	transform: translate(-50%, 0);
+
+}
+
+#canvas {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+}
+
+#rgb {
+	position: fixed;
+	top: 92%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-weight: 100;
+}
+
+span {
+	opacity: 0.3;
+}
