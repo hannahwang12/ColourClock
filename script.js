@@ -15,6 +15,16 @@ function addZero(i) {
 	return i;
 }
 
+window.setInterval(function() {
+	var canvas = document.getElementById("canvas");
+	var context = canvas.getContext("2d");
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+	var canvasWidth = canvas.width;
+	var canvasHeight = canvas.height;
+	context.translate(canvasWidth*0.5, canvasHeight*0.45);
+
+
 function updateTime() {
 
 	var today = new Date();
@@ -39,8 +49,7 @@ function updateTime() {
 	function drawClock() {
 
 
-
-		context.clearRect(0 - 0.5*canvasWidth, 0 - 0.42*canvasHeight, canvasWidth, canvasHeight);
+		context.clearRect(0 - 0.5*canvasWidth, 0 - 0.45*canvasHeight, canvasWidth, canvasHeight);
 
 		if (hour == 12) {
 			hour = 0;
@@ -50,43 +59,39 @@ function updateTime() {
 		var minutePosition = minute * (Math.PI/30) + second * (Math.PI/(30*60));
 		var secondPosition = second * (Math.PI/30);
 
-		drawHand(hourPosition, 0.25 * canvasHeight, 15);
-		drawHand(minutePosition, 0.35 * canvasHeight, 10);
-		drawHand(secondPosition, 0.4 * canvasHeight, 5);
+		drawHand(hourPosition, 0.25 * Math.min(canvasWidth, canvasHeight), 15);
+		drawHand(minutePosition, 0.35 * Math.min(canvasWidth, canvasHeight), 10);
+		drawHand(secondPosition, 0.4 * Math.min(canvasWidth, canvasHeight), 5);
 
 		console.log("clock");
 
 	}
 
+	function drawHand(position, length, width) {
+		context.beginPath();
+		context.lineWidth = width;
+		context.strokeStyle = "#eeeeee";
+		context.moveTo(0, 0);
+		context.rotate(position);
+		context.lineTo(0, -length);
+		context.lineTo(0, 0.03 * Math.min(canvasWidth, canvasHeight)); 
+		context.stroke();
+		context.rotate(-position);
+}
+
 	drawClock();
 }
 
 
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-		var canvasWidth = canvas.width;
-		var canvasHeight = canvas.height;
-		context.translate(canvasWidth*0.5, canvasHeight*0.42);
 
 
 
 
-function drawHand(position, length, width) {
-	context.beginPath();
-	context.lineWidth = width;
-	context.strokeStyle = "#eeeeee";
-	context.moveTo(0, 0);
-	context.rotate(position);
-	context.lineTo(0, -length);
-	context.lineTo(0, 0.03 * canvasHeight); 
-	context.stroke();
-	context.rotate(-position);
-}
 
 
-window.setInterval(function() {
+
+
+
 
 
 	updateTime();
