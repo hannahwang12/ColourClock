@@ -15,6 +15,22 @@ function addZero(i) {
 	return i;
 }
 
+var rgb = true;
+var hex = false;
+
+
+document.getElementById("button").onclick = function() {
+	if (rgb) {
+		rgb = false;
+		hex = true;
+		console.log("button click");
+	} else {
+		rgb = true;
+		hex = false;
+		console.log("button!!");
+	}
+}
+
 window.setInterval(function() {
 	var canvas = document.getElementById("canvas");
 	var context = canvas.getContext("2d");
@@ -34,14 +50,25 @@ function updateTime() {
 
 	hour = adjustHour(hour);
 
+	if (rgb) {
+		document.getElementById("body").style = "background-color: rgb(" + hour * 21 + "," + minute * 4 + "," + second * 4 + ");";
+		document.getElementById("rgb").innerHTML = "rgb(" + hour + "<span> * 21 </span>, " + minute + "<span> * 4 </span>, " + second + "<span> * 4</span>)";
+	} else if (hex) {
+	/*	if (hour < 10) {
+			document.getElementById("body").style = "background-color: #0" + hour + minute + second + ";";
+			document.getElementById("rgb").innerHTML = "#0" + hour + minute + second + ";";
+		} else { */
 
+		var hexHour = adjustHour(hour);
+		hexHour = addZero(hour);
+		var hexMinute = addZero(minute);
+		var hexSecond = addZero(second);
+		document.getElementById("body").style = "background-color: #" + hexHour + hexMinute + hexSecond + ";";
+		document.getElementById("rgb").innerHTML = "#" + hexHour + hexMinute + hexSecond;
+		
+	}	
 
-//	document.getElementById("body").style = "background-color: rgb(" + hour + "," + minute + "," + second + ");";
-	document.getElementById("body").style = "background-color: rgb(" + hour * 21 + "," + minute * 4 + "," + second * 4 + ");";
-//	document.getElementById("body").style = "background-color: #" + hour + minute + second + ";";
-
-	document.getElementById("rgb").innerHTML = "rgb(" + hour + "<span> * 21 </span>, " + minute + "<span> * 4 </span>, " + second + "<span> * 4 </span>)";
-
+	hour = addZero(hour);
 	minute = addZero(minute);
 	second = addZero(second);
 	document.getElementById("time").innerHTML = hour + " : " + minute + " : " + second;
@@ -81,18 +108,6 @@ function updateTime() {
 
 	drawClock();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 	updateTime();
 
