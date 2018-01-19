@@ -53,6 +53,7 @@ function updateTime() {
 	if (rgb) {
 		document.getElementById("body").style = "background-color: rgb(" + hour * 21 + "," + minute * 4 + "," + second * 4 + ");";
 		document.getElementById("rgb").innerHTML = "rgb(" + hour + "<span> * 21 </span>, " + minute + "<span> * 4 </span>, " + second + "<span> * 4</span>)";
+		document.getElementById("button").innerHTML = "rgb to hex";
 	} else if (hex) {
 	/*	if (hour < 10) {
 			document.getElementById("body").style = "background-color: #0" + hour + minute + second + ";";
@@ -65,6 +66,7 @@ function updateTime() {
 		var hexSecond = addZero(second);
 		document.getElementById("body").style = "background-color: #" + hexHour + hexMinute + hexSecond + ";";
 		document.getElementById("rgb").innerHTML = "#" + hexHour + hexMinute + hexSecond;
+		document.getElementById("button").innerHTML = "hex to rgb";
 		
 	}	
 
@@ -82,7 +84,7 @@ function updateTime() {
 			hour = 0;
 		}
 
-		var hourPosition = hour * (Math.PI/6) + minute * (Math.PI/(6*60)) + second * (Math.PI/(30*60));
+		var hourPosition = hour * (Math.PI/6) + minute * (Math.PI/(6*60)) + second * (Math.PI/(360*60));
 		var minutePosition = minute * (Math.PI/30) + second * (Math.PI/(30*60));
 		var secondPosition = second * (Math.PI/30);
 
